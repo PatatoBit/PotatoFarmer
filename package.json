@@ -13,6 +13,7 @@
     "lint": "eslint . --ext .ts"
   },
   "devDependencies": {
+    "@types/node": "^17.0.38",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
     "eslint": "^7.32.0 || ^8.2.0",
@@ -28,6 +29,9 @@
     "yarn-run-all": "^3.1.1"
   },
   "dependencies": {
+    "@discordjs/builders": "^0.6.0",
+    "@discordjs/rest": "^0.4.1",
+    "discord-api-types": "^0.33.2",
     "discord.js": "^13.7.0",
     "dotenv": "^16.0.1"
   }

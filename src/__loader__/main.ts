@@ -1,7 +1,11 @@
-import DiscordBot from '@src/DiscordBot';
+import MainDiscordBot from '@src/MainDiscordBot';
 import 'dotenv/config';
 
 const { TOKEN } = process.env;
-const discordBot = new DiscordBot(TOKEN);
+const discordBot = new MainDiscordBot(TOKEN);
 
-discordBot.build();
+try {
+  discordBot.build();
+} catch (error: any) {
+  console.log(error);
+}
