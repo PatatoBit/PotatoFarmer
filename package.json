@@ -1,8 +1,34 @@
 {
   "name": "litatha-discord-bot",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "https://github.com/teelyjc/litatha-discord-bot",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "scripts": {
+    "build:dev": "webpack --mode=development --watch",
+    "start:dev": "nodemon dist/app.js -q -w dist -e js",
+    "dev": "npm-run-all --silent --parallel build:dev start:dev",
+    "build": "webpack --mode=production",
+    "start": "node dist/app.js",
+    "lint": "eslint . --ext .ts"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-webpack-plugin": "^3.1.1",
+    "nodemon": "^2.0.16",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.7.2",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-node-externals": "^3.0.0",
+    "yarn-run-all": "^3.1.1"
+  },
+  "dependencies": {
+    "discord.js": "^13.7.0",
+    "dotenv": "^16.0.1"
+  }
 }
