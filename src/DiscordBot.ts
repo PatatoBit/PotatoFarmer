@@ -2,6 +2,7 @@ import { Client, Intents, Interaction } from 'discord.js';
 import { REST as DiscordAPI } from '@discordjs/rest';
 import CommandManager from '@src/commands/CommandManager';
 import LitathaBot from '@src/LitathaBot';
+import LogInfo from '@utils/LogInfo';
 
 abstract class DiscordBot implements LitathaBot {
 
@@ -20,18 +21,18 @@ abstract class DiscordBot implements LitathaBot {
 
   public constructor(TOKEN: string) {
     this.client = new Client({ intents: this.intents });
-    this.discordAPI = new DiscordAPI({ version: '10' }).setToken(TOKEN);
+    this.discordAPI = new DiscordAPI({ version: '9' }).setToken(TOKEN);
     this.commandManager = new CommandManager(this.client, this.discordAPI);
     this.TOKEN = TOKEN;
-
-    process.on('SIGINT', async () => {
-      this.client.destroy();
-      console.log('Good Bye');
-    });
   }
 
   public async build(): Promise<void> {
-    await this.client.login(this.TOKEN);
+    LogInfo.client('Loading resource..');
+    this.client.destroy();
+
+    setTimeout(async () => {
+      await this.client.login(this.TOKEN);
+    }, 2000);
 
     this.client.on('ready', this.onReady.bind(this));
     this.client.on('interactionCreate', this.onInteractionCreate.bind(this));
