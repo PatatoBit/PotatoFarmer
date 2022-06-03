@@ -20,11 +20,11 @@ Litatha Discord Bot
 
 </p>
 
-## [Commands Available](#commands)
+## Commands
 - help 
 - ping
 
-## [Usage](#usage)
+## Usage
 
 1. Head over to the [Discord Developer Portal](https://discord.com/developers) and create a bot.
 2. Copy the token and paste it in the `.env` file
