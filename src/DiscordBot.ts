@@ -22,6 +22,11 @@ abstract class DiscordBot {
     this.discordAPI = new DiscordAPI({ version: '10' }).setToken(TOKEN);
     this.commandManager = new CommandManager(this.client, this.discordAPI);
     this.TOKEN = TOKEN;
+
+    process.on('SIGINT', async () => {
+      this.client.destroy();
+      console.log('Good Bye');
+    });
   }
 
   public async build(): Promise<void> {
