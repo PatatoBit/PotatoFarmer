@@ -7,7 +7,7 @@ export default class PingCommand implements Command {
   public getInfo(): CommandInfo {
     return new SlashCommandBuilder()
       .setName('ping')
-      .setDescription('reply with pong !')
+      .setDescription('reply with pong!')
       .toJSON();
   }
 

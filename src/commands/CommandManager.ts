@@ -9,8 +9,12 @@ class CommandManager {
 
   private readonly discordAPI: DiscordAPI;
 
-  private readonly commandByLabel:
-    Map<string, Command> = new Map<string, Command>();
+  private readonly commandByLabel: Map<string, Command> = new Map<
+    string,
+    Command
+  >();
+
+  private allCommandInfo: Map<string, any> = new Map();
 
   public constructor(client: Client, discordAPI: DiscordAPI) {
     this.client = client;
@@ -22,34 +26,38 @@ class CommandManager {
       const { application } = this.client;
 
       const registeredCommands = await application.commands.fetch();
-      const registeredCommandsName = registeredCommands.map((info) => info.name).sort();
+      const registeredCommandsName = registeredCommands
+        .map((info) => info.name)
+        .sort();
 
       const commandsInfo = commands.map((command) => command.getInfo());
+
       const commandsName = commandsInfo.map((info) => info.name).sort();
 
-      const hasToRegister = (
-        (registeredCommandsName.length !== commandsName.length)
-        || !(commandsName.every((command) => registeredCommandsName.includes(command)))
-      );
+      const hasToRegister = registeredCommandsName.length !== commandsName.length
+      || !commandsName.every((command) => registeredCommandsName.includes(command));
 
       if (hasToRegister) {
-        await this.discordAPI.put(
-          Routes
-            .applicationCommands(application.id),
-          { body: commandsInfo },
-        );
+        await this.discordAPI.put(Routes.applicationCommands(application.id), {
+          body: commandsInfo,
+        });
 
-        const addition = commandsName
-          .filter((command) => !registeredCommandsName.includes(command)).length;
+        const addition = commandsName.filter(
+          (command) => !registeredCommandsName.includes(command),
+        ).length;
 
-        const deletion = registeredCommandsName
-          .filter((command) => !commandsName.includes(command))
-          .length;
+        const deletion = registeredCommandsName.filter(
+          (command) => !commandsName.includes(command),
+        ).length;
 
         if (addition) {
-          console.log(`Registered new ${addition} commands to Discord successfully`);
+          console.log(
+            `Registered new ${addition} commands to Discord successfully`,
+          );
         } else {
-          console.log(`Unregistered ${deletion} commands from Discord successfully`);
+          console.log(
+            `Unregistered ${deletion} commands from Discord successfully`,
+          );
         }
       }
 
@@ -58,7 +66,9 @@ class CommandManager {
       });
 
       console.log(`Commands: ${commandsName.join(', ')}`);
-      console.log(`Registered ${commands.length} commands in-memory successfully`);
+      console.log(
+        `Registered ${commands.length} commands in-memory successfully`,
+      );
     } catch (error) {
       console.error(error);
     }
