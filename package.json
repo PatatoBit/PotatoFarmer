@@ -6,10 +6,10 @@
   "private": true,
   "scripts": {
     "build:dev": "webpack --mode=development --watch",
-    "start:dev": "nodemon dist/app.js -q -w dist -e js",
+    "start:dev": "nodemon dist/sharding.js -q -w dist -e js",
     "dev": "npm-run-all --silent --parallel build:dev start:dev",
     "build": "webpack --mode=production",
-    "start": "node dist/app.js",
+    "start": "node dist/sharding.js",
     "lint": "eslint . --ext .ts"
   },
   "devDependencies": {

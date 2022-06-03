@@ -7,7 +7,10 @@ const nodeExternals = require('webpack-node-externals');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(srcPath, './__loader__/main.ts'),
+  entry: {
+    client: path.resolve(srcPath, './__loader__/client.ts'),
+    sharding: path.resolve(srcPath, './__loader__/sharding.ts'),
+  },
   module: {
     rules: [
       {
@@ -28,11 +31,12 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
       '@src': path.resolve('src'),
+      '@utils': path.resolve('src/utils'),
     },
   },
   output: {
     path: distPath,
-    filename: 'app.js',
+    filename: '[name].js',
     clean: true,
   },
 };

@@ -1,6 +1,7 @@
 # Litatha Discod Bot
 
 General use multi-function discord bot
+Sharding Ready.
 
 ## Commands Available
 - help 
