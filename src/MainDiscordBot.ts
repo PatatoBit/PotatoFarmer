@@ -1,6 +1,7 @@
 import DiscordBot from '@src/DiscordBot';
 import { Interaction } from 'discord.js';
 import PingCommand from '@src/commands/common/PingCommand';
+import HelpCommand from '@src/commands/common/HelpCommand';
 
 class MainDiscordBot extends DiscordBot {
 
@@ -9,6 +10,7 @@ class MainDiscordBot extends DiscordBot {
 
     this.commandManager.registerCommand([
       new PingCommand(),
+      new HelpCommand(),
     ]);
   }
 
@@ -18,5 +20,4 @@ class MainDiscordBot extends DiscordBot {
   }
 
 }
-
 export default MainDiscordBot;
