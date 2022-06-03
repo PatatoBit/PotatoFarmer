@@ -2,6 +2,7 @@ import { Client, CommandInteraction } from 'discord.js';
 import { REST as DiscordAPI } from '@discordjs/rest';
 import Command from '@src/commands/Command';
 import { Routes } from 'discord-api-types/v10';
+import LogInfo from '@src/utils/LogInfo';
 
 class CommandManager {
 
@@ -9,12 +10,8 @@ class CommandManager {
 
   private readonly discordAPI: DiscordAPI;
 
-  private readonly commandByLabel: Map<string, Command> = new Map<
-    string,
-    Command
-  >();
-
-  private allCommandInfo: Map<string, any> = new Map();
+  private readonly commandByLabel
+    : Map<string, Command> = new Map<string, Command>();
 
   public constructor(client: Client, discordAPI: DiscordAPI) {
     this.client = client;
@@ -51,11 +48,11 @@ class CommandManager {
         ).length;
 
         if (addition) {
-          console.log(
+          LogInfo.cmdmanager(
             `Registered new ${addition} commands to Discord successfully`,
           );
         } else {
-          console.log(
+          LogInfo.cmdmanager(
             `Unregistered ${deletion} commands from Discord successfully`,
           );
         }
@@ -65,8 +62,8 @@ class CommandManager {
         this.commandByLabel.set(command.getInfo().name, command);
       });
 
-      console.log(`Commands: ${commandsName.join(', ')}`);
-      console.log(
+      LogInfo.cmdmanager(`Commands: ${commandsName.join(', ')}`);
+      LogInfo.cmdmanager(
         `Registered ${commands.length} commands in-memory successfully`,
       );
     } catch (error) {
@@ -81,7 +78,7 @@ class CommandManager {
     try {
       await command.execute(interaction);
     } catch (error) {
-      console.log(error);
+      LogInfo.cmdmanager(error);
     }
   }
 
