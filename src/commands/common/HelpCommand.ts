@@ -35,18 +35,23 @@ export default class HelpCommand implements Command {
         commandMap.set(name, description);
       });
 
-      const helpEmbed = new MessageEmbed()
-        .setTitle('Available commands');
-
-      commandMap.forEach((desc, name) => {
-        helpEmbed.addField(name, desc);
-      });
-
-      // Reply with embed??
-      await interaction.editReply({ embeds: [helpEmbed] });
+      await interaction.editReply({ embeds: [this.helpEmbed(commandMap)] });
     } catch (error: any) {
       throw new Error(error.message);
     }
+  }
+
+  private helpEmbed(commandMap: Map<any, any>): MessageEmbed {
+    const helpEmbed = new MessageEmbed()
+      .setTitle('')
+      .setColor('#89CFF0') // #89CFF0 #4545d6
+      .setTimestamp();
+
+    commandMap.forEach((desc, name) => {
+      helpEmbed.addField(name, desc);
+    });
+
+    return helpEmbed;
   }
 
 }

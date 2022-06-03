@@ -1,7 +1,7 @@
 import { Client, CommandInteraction } from 'discord.js';
 import { REST as DiscordAPI } from '@discordjs/rest';
 import Command from '@src/commands/Command';
-import { Routes } from 'discord-api-types/v10';
+import { Routes } from 'discord-api-types/v9';
 import LogInfo from '@src/utils/LogInfo';
 
 class CommandManager {
@@ -67,7 +67,7 @@ class CommandManager {
         `Registered ${commands.length} commands in-memory successfully`,
       );
     } catch (error) {
-      console.error(error);
+      LogInfo.cmdmanager(error);
     }
   }
 
