@@ -1,5 +1,5 @@
 <h1 align="center">
-Litatha Discod Bot
+Litatha Discord Bot
 <br />
 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
 <img src="./assets/images/prince.png" />
