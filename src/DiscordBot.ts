@@ -1,8 +1,9 @@
 import { Client, Intents, Interaction } from 'discord.js';
 import { REST as DiscordAPI } from '@discordjs/rest';
 import CommandManager from '@src/commands/CommandManager';
+import LitathaBot from '@src/LitathaBot';
 
-abstract class DiscordBot {
+abstract class DiscordBot implements LitathaBot {
 
   protected readonly client: Client;
 
@@ -34,6 +35,10 @@ abstract class DiscordBot {
 
     this.client.on('ready', this.onReady.bind(this));
     this.client.on('interactionCreate', this.onInteractionCreate.bind(this));
+  }
+
+  public getClient(): Client {
+    return this.client;
   }
 
   protected abstract onReady(): void;
