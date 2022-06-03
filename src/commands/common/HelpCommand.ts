@@ -1,8 +1,14 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 import Command, { CommandInfo } from '@src/commands/Command';
-import { CommandInteraction } from 'discord.js';
+import { Client, CommandInteraction } from 'discord.js';
 
 export default class HelpCommand implements Command {
+
+  private readonly client: Client;
+
+  public constructor(client: Client) {
+    this.client = client;
+  }
 
   public getInfo(): CommandInfo {
     return new SlashCommandBuilder()
@@ -15,7 +21,30 @@ export default class HelpCommand implements Command {
     interaction: CommandInteraction,
   ): Promise<void> {
     await interaction.deferReply();
-    await interaction.editReply('Help ?');
+    try {
+      const { application: { commands } } = this.client;
+      const commandList = await commands.fetch();
+
+      const commandInfo = new Map<string, string>();
+
+      const commandMap = new Map<any, any>();
+
+      commandList.forEach(({ name, description }) => {
+        commandMap.set(name, description);
+      });
+
+      let commandString = '';
+
+      commandMap.forEach((desc, name) => {
+        console.log(name, desc);
+        commandString += `**${name}**: ${desc} \n`;
+      });
+      // CommandName: description
+
+      await interaction.editReply(commandString);
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
 
   }
 

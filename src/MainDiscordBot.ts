@@ -5,12 +5,12 @@ import HelpCommand from '@src/commands/common/HelpCommand';
 
 class MainDiscordBot extends DiscordBot {
 
-  protected onReady(): void {
+  protected async onReady(): Promise<void> {
     console.info(`Logged in as ${this.client.user.tag} !`);
 
     this.commandManager.registerCommand([
       new PingCommand(),
-      new HelpCommand(),
+      new HelpCommand(this.client),
     ]);
   }
 
