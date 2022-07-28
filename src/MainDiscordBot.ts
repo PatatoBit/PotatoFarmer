@@ -9,13 +9,13 @@ class MainDiscordBot extends DiscordBot {
   private presence: PresenceData = {
     status: 'online',
     activities: [{
-      name: 'Github',
+      name: 'Under Development',
       type: 'PLAYING',
     }],
   };
 
   protected async onReady(): Promise<void> {
-    LogInfo.client(`Logged in as ${this.client.user.tag} !`);
+    LogInfo.client(`✅Logged in as ${this.client.user.tag} !`);
 
     const setPresence = () => this.client.user.setPresence(this.presence);
 

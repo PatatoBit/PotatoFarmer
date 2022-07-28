@@ -14,7 +14,7 @@ export default class HelpCommand implements Command {
   public getInfo(): CommandInfo {
     return new SlashCommandBuilder()
       .setName('help')
-      .setDescription('show all commands')
+      .setDescription('List all commands')
       .toJSON();
   }
 
